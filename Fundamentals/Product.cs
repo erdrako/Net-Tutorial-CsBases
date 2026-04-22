@@ -26,9 +26,24 @@ public class Product : IProduct
         Price -= Price * (percentage / 100);
     }
 
-    public string GetDescription()
+    public virtual string GetDescription()
     {
         return $"{Name} - Price: {Price:C}";
     }
 
+}
+
+class ServiceProduct : Product
+{
+    public int DurationInDays { get; set; }
+
+    public ServiceProduct(string name, decimal price, int duration) : base(name, price)
+    {
+        DurationInDays = duration;
+    }
+
+    public override string GetDescription()
+    {
+        return $"{base.GetDescription()} - Duración: {DurationInDays} días";
+    }
 }
